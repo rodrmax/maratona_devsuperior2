@@ -1,9 +1,12 @@
 package com.corpmax.entrega_rapida.DTO;
 
+import java.io.Serializable;
+
 import com.corpmax.entrega_rapida.entities.Product;
 
-public class ProductDTO {
+public class ProductDTO implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String name;
 	private Double price;
@@ -22,7 +25,6 @@ public class ProductDTO {
 	}
 	
 	public ProductDTO(Product entity) {
-		super();
 		id = entity.getId();
 		name = entity.getName();
 		price = entity.getPrice();
