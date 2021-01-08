@@ -1,5 +1,6 @@
 package com.corpmax.entrega_rapida.services;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,8 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.corpmax.entrega_rapida.DTO.OrderDTO;
+import com.corpmax.entrega_rapida.DTO.ProductDTO;
 import com.corpmax.entrega_rapida.entities.Order;
+import com.corpmax.entrega_rapida.entities.OrderStatus;
+import com.corpmax.entrega_rapida.entities.Product;
 import com.corpmax.entrega_rapida.repositories.OrderRepository;
+import com.corpmax.entrega_rapida.repositories.ProductRepository;
 
 
 @Service
@@ -17,6 +22,9 @@ public class OrderService {
 	
 	@Autowired
 	private OrderRepository repository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Transactional(readOnly = true)
 	public List<OrderDTO> findAll(){
@@ -24,6 +32,24 @@ public class OrderService {
 		List<Order> list = repository.findOrdersWithProducts();
 		
 		return list.stream().map(x -> new OrderDTO(x)).collect(Collectors.toList());
+		
+	}
+	
+	
+	@Transactional
+	public OrderDTO Insert(OrderDTO dto){
+	
+		Order order = new Order(null, dto.getAddress(), dto.getLatitude(), 
+								dto.getLongitude(), Instant.now(), OrderStatus.PENDING);
+		
+		for(ProductDTO p : dto.getProducts()) {
+			Product product = productRepository.getOne(p.getId());
+			order.getProducts().add(product);
+		}
+		
+		order = repository.save(order);
+		
+		return new OrderDTO(order);
 		
 	}
 }
