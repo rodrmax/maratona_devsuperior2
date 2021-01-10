@@ -22,7 +22,9 @@ function Order() {
     useEffect(() => {
         fetchProducts()
             .then(resp => setProducts(resp.data))
-            .catch(error => console.log(error))
+            .catch(() => {
+                toast.warning('Erro ao listar produtos');
+            })
     }, []);
 
     const handleSelectProduct = (product: Product) => {
@@ -42,13 +44,12 @@ function Order() {
           ...orderLocation!,
           products: productsIds
         }
-      
         saveOrder(payload).then((response) => {
           toast.error(`Pedido enviado com sucesso! - Ordem ${response.data.id}`);
           setSelectedProducts([]);
         })
-          .catch(() => {
-            toast.warning('Erro ao enviar pedido');
+          .catch((error) => {
+            toast.warning(`Erro ao enviar pedido - ${error}`);
           })
       }
       
