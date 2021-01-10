@@ -7,13 +7,13 @@ function Footer(){
         <footer className="main-footer">
             <span>CopyRight - App desenvolvido durante a 2ª ed. do evento Semana DevSuperior - Fast Delivery</span>
             <div className="footer-icons">
-                <a href="#" target="_new">
+                <a href='#foo' target="_new">
                     <FontAwesomeIcon icon={faInstagram} color="white" size="2x" />
                 </a>
-                <a href="#" target="_new">
+                <a href='#foo' target="_new">
                     <FontAwesomeIcon icon={faYoutube} color="white" size="2x" />
                 </a>
-                <a href="#" target="_new">
+                <a href='#foo' target="_new">
                     <FontAwesomeIcon icon={faLinkedinIn} color="white" size="2x" />
                 </a>
             </div>
