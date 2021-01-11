@@ -9,7 +9,7 @@ function Home() {
     const navigation = useNavigation();
 
     const handleOnPress = () => {
-        navigation.navigate('Order');
+        navigation.navigate('Orders');
     }
 
   return (
