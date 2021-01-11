@@ -1,15 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
+import Header from '../Header';
+
 
 function Home() {
 
+    const navigation = useNavigation();
+
     const handleOnPress = () => {
-        console.log("go to fazer pedido")
+        navigation.navigate('Order');
     }
 
   return (
       <>
+        <Header/>
         <View style={styles.container}>
             <Image source={require('../assets/deliveryman.png')} />
             <Text style={styles.title}> Acompanhe os pedidos e estregue no prazo </Text>
